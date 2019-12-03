@@ -15,6 +15,7 @@ import 'react-toastify/dist/ReactToastify.css'
 import { ImageAPI } from '../../../network/imperial.api'
 
 
+
 const AdminDashboardContainer = props => {
     const [foodImage, setImage] = useState(null)
     const [price, setPrice] = useState(0);
@@ -59,12 +60,13 @@ const AdminDashboardContainer = props => {
     const Fetch_Food_Menu = userData => {
         const token = userData.token
         FetchAdminControllerFoodMenu(token, (networkErr, userErr, data) => {
-            if (networkErr != null) {console.log(networkErr) }
-            else if (userErr != null) { 
-                if(userErr.message=="jwt expired"){
+            if (networkErr != null) { console.log(networkErr) }
+            else if (userErr != null) {
+                if (userErr.message == "jwt expired") {
                     props.history.push(`${RoutePath.Login}`)
-                 }
-                console.log(JSON.stringify(userErr.message)) }
+                }
+                console.log(JSON.stringify(userErr.message))
+            }
             else {
 
                 setFoodMenu(data.payload)
@@ -81,7 +83,7 @@ const AdminDashboardContainer = props => {
         ProductUpdateData.append('size', size)
         ProductUpdateData.append('menuId', menuId);
         ProductUpdateData.append('foodImage', foodImage)
-
+        console.log(ProductUpdateData)
         FetchAdminControllerUpdateFood({ ProductUpdateData, foodId: foodId, token: userData.token }, (networkErr, userErr, data) => {
             if (networkErr != null) { console.log(networkErr) }
             else if (userErr != null) { console.log(JSON.stringify(userErr.message)) }
@@ -107,53 +109,53 @@ const AdminDashboardContainer = props => {
         e.preventDefault();
         const userData = readCookie(props.cookies)
         let token = userData.token
-        const flag =MenuData.reduce((r, c) => {
+        const flag = MenuData.reduce((r, c) => {
             // console.log("Food name", c.food_name, "Boolean", c.food_name === foodName)
             // console.log("result",r)
             //c.food_name and foodName check if they are matched while looping.and then the results are stored in r
-            return r ? r : c.menu_name ===MenuItems
+            return r ? r : c.menu_name === MenuItems
         }, false)
-        
-            if (flag) {
-                toast.warn("You cannot type same category values", {
-                    position: toast.POSITION.TOP_LEFT
-                });
-                
-            }
-            else {
-            
-                toast.dismiss()
-                FetchAdminControllerAddMenu({ MenuItems, token }, (networkErr, userErr, data) => {
-                    if (networkErr != null) {
-                        console.log(networkErr)
-                    }
-                    else if (userErr != null) {
-                        console.log(JSON.stringify(userErr.message))
-                    }
-                    else {
-                        Fetch_Menu()
-                        const modals = document.getElementById('menuItems')
-                        const modalBackdrops = document.getElementsByClassName('modal-backdrop');
-                        modals.classList.remove('show')
-                        document.body.removeChild(modalBackdrops[0]);
-                        setMenuStatus(data.success)
-                        // setStatus(false)
-                        // setMsg(false)
-                        setMenuItems("")
-                        setTimeout(() => {
-                            toast.success("Succeded !", {
-                                position: toast.POSITION.TOP_CENTER
-                            });
-                        }, 1000);
+
+        if (flag) {
+            toast.warn("You cannot type same category values", {
+                position: toast.POSITION.TOP_LEFT
+            });
+
+        }
+        else {
+
+            toast.dismiss()
+            FetchAdminControllerAddMenu({ MenuItems, token }, (networkErr, userErr, data) => {
+                if (networkErr != null) {
+                    console.log(networkErr)
+                }
+                else if (userErr != null) {
+                    console.log(JSON.stringify(userErr.message))
+                }
+                else {
+                    Fetch_Menu()
+                    const modals = document.getElementById('menuItems')
+                    const modalBackdrops = document.getElementsByClassName('modal-backdrop');
+                    modals.classList.remove('show')
+                    document.body.removeChild(modalBackdrops[0]);
+                    setMenuStatus(data.success)
+                    // setStatus(false)
+                    // setMsg(false)
+                    setMenuItems("")
+                    setTimeout(() => {
+                        toast.success("Succeded !", {
+                            position: toast.POSITION.TOP_CENTER
+                        });
+                    }, 1000);
 
 
-                    }
+                }
 
 
-                })
-            }
+            })
+        }
 
-        
+
 
 
     }
@@ -213,9 +215,6 @@ const AdminDashboardContainer = props => {
     const HandleAddMenuItems = MenuItems => {
 
         setMenuItems(MenuItems)
-
-
-
     }
 
     const HandleFoodName = foodName => {
@@ -224,10 +223,11 @@ const AdminDashboardContainer = props => {
     }
 
     const HandleImage = foodImage => {
+
         setFile(URL.createObjectURL(foodImage))
         setImage(foodImage)
     }
-
+    console.log(file)
     const HandleMenuId = menuId => {
         setMenuId(menuId)
     }
@@ -264,12 +264,15 @@ const AdminDashboardContainer = props => {
     const clearMenuItem = () => setMenuItems("");
 
     const ClearState = () => {
+
         setPrice(0);
         setSize("");
         setImage(null);
         setFile(null)
         setMenuId(1);
         setFoodName("");
+        const a = document.getElementById('file')
+        a.value = null
     }
 
     // const OffAlertStatus = e => setStatus(false)

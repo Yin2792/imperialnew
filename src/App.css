@@ -24,3 +24,27 @@
 .modal-backdrop.show {
   z-index: 0!important;
 }
+@media (max-width: 1666px){
+  .p-5{
+    padding: 1rem !important;
+  }
+  .card-body{
+    min-height: auto ! important;
+  }
+  }
+  @media (max-width: 1267px){
+    .col-xl-12{
+      padding-right: 0px !important;
+    }
+    }
+    .rc-pagination-prev{
+      border: 1px solid white;
+    }
+    .rc-pagination-prev a{
+      color: white;
+    }
+    .rc-pagination-item-active{
+      background-color:#dc1c1c;
+      border-color:#dc1c1c ;
+      
+    }

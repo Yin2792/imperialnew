@@ -29,17 +29,6 @@ const DashboardNavbar = props => {
                     <MDBDropdownMenu basic>
                         <MDBDropdownItem>{name ? name.username : "no user"}</MDBDropdownItem>
                         <MDBDropdownItem divider />
-                        <Link to={`${RoutePath.Admin_Register}`}>
-                            <MDBDropdownItem>
-                                <strong>Register</strong>
-                                {/* <MyLink
-                                className="pr-4"
-                                to={`${RoutePath.Admin_Register}`}
-                                text={"Register"}
-                                style={{ cursor: 'pointer', color: 'black' }}
-                            /> */}
-                            </MDBDropdownItem>
-                        </Link>
                         <MDBDropdownItem>
                             <div onClick={LOGOUT}><strong style={{ color: 'black' }}>Logout</strong></div>
                         </MDBDropdownItem>

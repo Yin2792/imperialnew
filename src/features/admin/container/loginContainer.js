@@ -71,8 +71,7 @@ const LoginContainer = props => {
                 <div style={{backgroundColor: '#6B7FD0',position:'relative'}}>
                     <div className="d-flex flex-row mb-3 justify-content-center" >
                         <div className="p-2"><img src={Logo} alt="Logo" className="w-100" /></div>
-                        <div className="p-2 my-3"><h5 style={{ fontSize: fsc(15), color: '#D6DAE9' }}>No Account Yet?</h5></div>
-                        <div className="p-2"><MDBBtn outline color="white" onClick={()=>moveToRegister()}>Sign UP</MDBBtn></div>
+                        
 
                     </div>
 

@@ -47,14 +47,20 @@ const Home = () => {
     if (c.food_id == val1) {
       return [...r, c]
     }
+    
     return val.includes(c.menu_id) ? [...r, c] : r
     // console.log({ val, c: c.menu_id })
   }, [])
   console.log(val1)
   return (
     <div>
-      <Banner handleOnChange={HandleOnChange} foodData={FoodData} />
+      <Banner handleOnChange={HandleOnChange} handleCheck={HandleCheck} val={val} foodData={FoodData} MenuLists={MenuLists} />
       <FoodContainer val={val} val1={val1} handleOnChange={HandleCheck} tempData={tempData} food={FoodData} MenuLists={MenuLists} />
+      <div  className="container-fluid" style={{background:'black',minHeight:'99px'}}>
+           <div className="d-flex justify-content-center">
+                <h5 className="text-light my-5">Copyright © 2019 - All Rights Reserved by KUMO Solutions.</h5>
+           </div>
+      </div>
     </div>
   );
 };

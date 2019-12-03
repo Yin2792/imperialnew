@@ -32,7 +32,7 @@ export const Modal = props => {
                                 <MDBInput label="Food Name" name="foodName" id="foodName" onChange={(e) => HandleFoodName(e.target.value, index)} value={foodName} validate required />
                             </div>
                             <div className="col">
-                                <MDBInput label="Food Price" name="price" onChange={(e) => HandlePrice(e.target.value, index)} value={price} validate required />
+                                <MDBInput label="Food Price" name="price" type="number" onChange={(e) => HandlePrice(e.target.value, index)} value={price} validate required />
                             </div>
                             <div className="col">
                                 <MDBInput label="Food size" name="size" onChange={(e) => HandleSize(e.target.value, index)} value={size} validate required />
@@ -55,7 +55,7 @@ export const Modal = props => {
                         <div className="row">
                             <div class="form-group col my-3">
 
-                                <input type="file" class="form-control-file" name="foodImage" id="file"
+                                <input type="file" class="form-control-file" name="foodImage" id="file" accept="image/*"
                                     onChange={(e) => HandleImage(e.target.files[0])} required={file==null?false:true} />
                             </div>
 
